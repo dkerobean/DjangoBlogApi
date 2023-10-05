@@ -15,6 +15,11 @@ class ContactTestCase(TestCase):
             'message': 'Test Message'
         }
 
+    def test_contact_get(self):
+        self.url = reverse('contact-view')
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_contact_create(self):
         self.url = reverse('contact-create')
         response = self.client.post(self.url, self.contact_data, format='json')
