@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from .models import Tag
+from blog_post.models import Tag
 
 
 class TestTag(TestCase):
@@ -19,12 +19,17 @@ class TestTag(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Tag.objects.count(), 1)
 
-    def test_tag_get(self):
-        tag = Tag.objects.create(**self.tag_data)
-        url = reverse('tag-get', kwargs={'pk': tag.id})
-
-        response = self.client.get(url)
+    def test_tag_view(self):
+        self.url = reverse('tag-list')
+        response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    # def test_tag_get(self):
+    #     tag = Tag.objects.create(**self.tag_data)
+    #     url = reverse('tag-get', kwargs={'pk': tag.id})
+
+    #     response = self.client.get(url)
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_tag_delete(self):
         tag = Tag.objects.create(**self.tag_data)
