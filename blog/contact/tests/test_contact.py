@@ -26,3 +26,18 @@ class ContactTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(Contact.objects.count(), 1)
         self.assertTrue(Contact.objects.get().name, 'Test Name')
+
+    def test_contact_detail(self):
+        contact = Contact.objects.create(**self.contact_data)
+        url = reverse('contact-detail', kwargs={'pk': contact.id})
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_contact_delete(self):
+        contact = Contact.objects.create(**self.contact_data)
+        url = reverse('contact-delete', kwargs={'pk': contact.id})
+
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(Contact.objects.count(), 0)
