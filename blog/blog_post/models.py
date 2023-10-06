@@ -4,6 +4,7 @@ from user.models import CustomUser
 
 # UserProfile model
 class UserProfile(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
     position = models.CharField(max_length=150)
@@ -18,6 +19,7 @@ class UserProfile(models.Model):
 
 
 class Tag(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
@@ -25,6 +27,7 @@ class Tag(models.Model):
 
 
 class Category(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
@@ -32,6 +35,7 @@ class Category(models.Model):
 
 
 class BlogPost(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     content = models.TextField()
     image = models.ImageField(upload_to='blog_pics/', blank=True)
@@ -46,7 +50,9 @@ class BlogPost(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
+    id = models.AutoField(primary_key=True)
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE,
+                             related_name='comments')
     author = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
