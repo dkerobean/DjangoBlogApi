@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from .models import Tag
 from .serializers import TagSerializer
+from rest_framework.permissions import IsAdminUser
 
 
 class TagCreateView(APIView):
@@ -14,6 +15,8 @@ class TagCreateView(APIView):
 
 
 class TagDetailView(APIView):
+
+    permission_classes = [IsAdminUser]
 
     def post(self, request):
         serializer = TagSerializer(data=request.data)
