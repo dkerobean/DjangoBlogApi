@@ -24,3 +24,11 @@ class TestCategories(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Category.objects.count(), 1)
+
+    def test_category_delete(self):
+        category = Category.objects.create(**self.contact_data)
+        url = reverse('category-delete', kwargs={'pk': category.id})
+
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(category.objects.count(), 0)
