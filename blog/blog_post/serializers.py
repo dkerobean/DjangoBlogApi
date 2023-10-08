@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Tag
+from .models import Tag, Category
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -9,5 +9,16 @@ class TagSerializer(serializers.ModelSerializer):
 
     def validate_name(self, value):
         if not value:
-            raise serializers.ValidationError("Name must be specified")
+            raise serializers.ValidationError("Tag name must be specified")
+        return value
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+    def validate_name(self, value):
+        if not value:
+            raise serializers.ValidationError("Category name must be specified") # noqa
         return value

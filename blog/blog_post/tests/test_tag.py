@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 from blog_post.models import Tag
+# from user.models import CustomUser
 
 
 class TestTag(TestCase):
@@ -11,6 +12,7 @@ class TestTag(TestCase):
         self.tag_data = {
             'name': 'TestTag'
         }
+        # self.admin_user = CustomUser.objects.create_superuser(email='test@example.com', password='admin_password') # noqa
 
     def test_tag_create(self):
         self.url = reverse('tag-create')

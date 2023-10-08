@@ -34,6 +34,7 @@ class ContactDetailView(APIView):
     def delete(self, request, pk):
         self.permission_classes = [IsAdminUser]
         self.check_permissions(request)
+
         try:
             contact = Contact.objects.get(id=pk)
             contact.delete()

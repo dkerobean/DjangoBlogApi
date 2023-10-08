@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 from contact.models import Contact
+# from user.models import CustomUser
 
 
 class ContactTestCase(TestCase):
@@ -35,9 +36,10 @@ class ContactTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_contact_delete(self):
+        # self.admin_user = CustomUser.objects.create_superuser(email='test@example.com', password='admin_password') # noqa
         contact = Contact.objects.create(**self.contact_data)
         url = reverse('contact-delete', kwargs={'pk': contact.id})
 
-        response = self.client.delete(url)
+        response = self.client.delete(url) # noqa
         # self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         # self.assertEqual(Contact.objects.count(), 0)
