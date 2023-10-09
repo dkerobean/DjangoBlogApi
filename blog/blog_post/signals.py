@@ -10,8 +10,7 @@ def create_profile(sender, instance, created, **kwargs):
         user = instance
         user_profile = UserProfile.objects.create( # noqa
             user=user,
-            name=user.first_name,
-            email=user.email
+            name=user.first_name
         )
 
 

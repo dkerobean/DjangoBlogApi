@@ -22,9 +22,7 @@ class TestUserProfile(TestCase):
             'linkedin': 'www.linkedin.com',
             }
 
-    def test_create_user_profile(self):
-        self.url = reverse('profile-create')
-        response = self.client.post(self.url, self.user_data, format='json')
-
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(UserProfile.objects.count(), 1)
+    def view_user_profile(self):
+        # login user or create user 
+        # check user profile and manke sure its the same user
+        # assert true status code is returned

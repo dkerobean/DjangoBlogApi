@@ -15,7 +15,7 @@ class UserProfile(models.Model):
     linkedin = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return self.user.username
+        return self.name
 
 
 class Tag(models.Model):
