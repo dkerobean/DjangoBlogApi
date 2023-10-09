@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from blog_post.models import Tag, Category
+from blog_post.models import Category
 
 
 class TestCategories(TestCase):
