@@ -1,9 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from .models import Tag, Category
-from .serializers import TagSerializer, CategorySerializer
-from rest_framework.permissions import IsAdminUser # noqa
+from .models import Tag, Category, UserProfile
+from .serializers import TagSerializer, CategorySerializer, UserProfileSerializer
+from rest_framework.permissions import IsAdminUser, IsAuthenticated # noqa
 
 
 class TagCreateView(APIView):
@@ -61,3 +61,47 @@ class CategoryDetailView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Category.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+""" USER PROFILE """
+
+
+class UserProfileView(APIView):
+
+    def get(self, request):
+        profiles = UserProfile.objects.all()
+        serializer = UserProfileSerializer(profiles, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class UserProfileDetailView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+
+        user = request.user
+
+        if int(pk) != user.id:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            profile = UserProfile.objects.get(user=user)
+            serializer = UserProfileSerializer(profile)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except UserProfile.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk):
+        user = request.user
+
+        if int(pk) != user.id:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            profile = UserProfile.objects.get(user=user)
+            profile.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except UserProfile.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+

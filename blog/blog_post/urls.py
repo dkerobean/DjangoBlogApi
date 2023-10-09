@@ -10,4 +10,8 @@ urlpatterns = [
     path('category/list/', views.CategoryListView.as_view(), name="category-list"), # noqa
     path('category/create/', views.CategoryDetailView.as_view(), name="category-create"), # noqa
     path('category/delete/<int:pk>/', views.CategoryDetailView.as_view(), name="category-delete"), # noqa
+
+    path('profile/view-all/', views.UserProfileView.as_view(), name="profiles"),
+    path('profile/view/<int:pk>/', views.UserProfileDetailView.as_view(), name="profile-view"),
+    path('profile/delete/<int:pk>/', views.UserProfileDetailView.as_view(), name="profile-delete"),
 ]

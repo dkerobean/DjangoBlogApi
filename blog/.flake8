@@ -3,5 +3,6 @@ exclude =
     migrations,
     manage.py,
     apps.py,
+    urls.py
     settings.py,
     __pycache__

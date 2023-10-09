@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Tag, Category
+from .models import Tag, Category, UserProfile
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -22,3 +22,9 @@ class CategorySerializer(serializers.ModelSerializer):
         if not value:
             raise serializers.ValidationError("Category name must be specified") # noqa
         return value
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
