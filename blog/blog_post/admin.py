@@ -5,4 +5,3 @@ admin.site.register(Tag)
 admin.site.register(Category)
 admin.site.register(UserProfile)
 admin.site.register(BlogPost)
-

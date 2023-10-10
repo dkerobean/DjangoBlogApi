@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from blog_post.models import BlogPost, UserProfile
+from blog_post.models import BlogPost
 from user.models import CustomUser
 
 
@@ -11,7 +11,7 @@ class TestBlogPost(TestCase):
         self.client = APIClient()
         self.user = CustomUser.objects.create(email='testuser@example.com',
                                               password='testpassword')
-        
+
         self.blog_data = {
             'title': 'Test Blog Post',
             'content': 'Test Content',

@@ -122,6 +122,8 @@ class BlogListView(APIView):
 
 class BlogDetailView(APIView):
 
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, pk):
         try:
             blog = BlogPost.objects.get(id=pk)
@@ -150,7 +152,8 @@ class BlogDetailView(APIView):
                     return Response(serializer.data, status=status.HTTP_200_OK)
                 else:
                     return Response(status=status.HTTP_400_BAD_REQUEST)
-            raise PermissionError("You do not have permissions to perform this action")
+            raise PermissionError("You do not have permissions \
+                                  to perform this action")
 
         except BlogPost.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
@@ -164,8 +167,7 @@ class BlogDetailView(APIView):
                 blog.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
             else:
-                raise PermissionError("You do not have permissions to perform this action")
+                raise PermissionError("You do not have permissions \
+                                      to perform this action")
         except BlogPost.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
-

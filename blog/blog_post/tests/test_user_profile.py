@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from blog_post.models import UserProfile
 from user.models import CustomUser
 
 
@@ -42,4 +41,3 @@ class TestUserProfile(TestCase):
 
         response = self.client.delete(self.url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-
