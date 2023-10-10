@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from blog_post.models import BlogPost
+from blog_post.models import BlogPost, UserProfile
 from user.models import CustomUser
 
 
@@ -11,11 +11,12 @@ class TestBlogPost(TestCase):
         self.client = APIClient()
         self.user = CustomUser.objects.create(email='testuser@example.com',
                                               password='testpassword')
+        
         self.blog_data = {
             'title': 'Test Blog Post',
             'content': 'Test Content',
             'image': 'testimage',
-            'author': self.user,
+            'author': self.user.profile,
             'tags': 'testtags',
         }
 
@@ -49,5 +50,3 @@ class TestBlogPost(TestCase):
 
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-
