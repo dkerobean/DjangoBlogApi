@@ -32,5 +32,5 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class BlogPostSerializer(serializers.ModelSerializer):
     class Meta:
-        models = BlogPost
+        model = BlogPost
         fields = '__all__'

@@ -27,8 +27,8 @@ class TestBlogPost(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(BlogPost.objects.count(), 1)
 
-    def test_view_blogpost(self):
-        self.url = reverse('blog-view')
+    def test_view_blogposts(self):
+        self.url = reverse('blog-view-all')
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -42,5 +42,12 @@ class TestBlogPost(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(blog.objects.count(), 0)
+
+    def test_view_blog(self):
+        blog = BlogPost.objects.create(**self.blog_data)
+        url = reverse('blog-view', args=(blog.id,))
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 

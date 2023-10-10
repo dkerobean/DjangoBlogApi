@@ -14,4 +14,7 @@ urlpatterns = [
     path('profile/view-all/', views.UserProfileView.as_view(), name="profiles"),
     path('profile/view/<int:pk>/', views.UserProfileDetailView.as_view(), name="profile-view"),
     path('profile/delete/<int:pk>/', views.UserProfileDetailView.as_view(), name="profile-delete"),
+
+    path('blog/view-all/', views.BlogListView.as_view(), name="blog-view-all"),
+    path('blog/view/<int:pk>/', views.BlogDetailView.as_view(), name="blog-view"),
 ]
