@@ -11,7 +11,6 @@ from rest_framework.permissions import IsAuthenticated # noqa
 
 class TagCreateView(APIView):
 
-
     def get(self, request):
         tags = Tag.objects.all()
         serializer = TagSerializer(tags, many=True)

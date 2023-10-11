@@ -13,7 +13,7 @@ class TestCategories(TestCase):
         self.contact_data = {
             'name': 'TestCategory',
         }
-        self.user = CustomUser.objects.create_user(email='testuser@example.com', password='testpassword')
+        self.user = CustomUser.objects.create_user(email='testuser@example.com', password='testpassword') # noqa
 
         # Generate a JWT token for the user
         refresh = RefreshToken.for_user(self.user)
@@ -26,7 +26,7 @@ class TestCategories(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_category_create(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}') # noqa
 
         self.url = reverse('category-create')
         response = self.client.post(self.url, self.contact_data)
@@ -35,7 +35,7 @@ class TestCategories(TestCase):
         self.assertEqual(Category.objects.count(), 1)
 
     def test_category_delete(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}') # noqa
 
         category = Category.objects.create(**self.contact_data)
         url = reverse('category-delete', kwargs={'pk': category.id})

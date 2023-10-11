@@ -13,14 +13,14 @@ class TestTag(TestCase):
         self.tag_data = {
             'name': 'TestTag'
         }
-        self.user = CustomUser.objects.create_user(email='test@example', password='testpassword')
+        self.user = CustomUser.objects.create_user(email='test@example', password='testpassword') # noqa
 
         # Generate a JWT token for the user
         refresh = RefreshToken.for_user(self.user)
         self.access_token = str(refresh.access_token)
 
     def test_tag_create(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}') # noqa
 
         self.url = reverse('tag-create')
         response = self.client.post(self.url, self.tag_data, format='json')
@@ -41,7 +41,7 @@ class TestTag(TestCase):
     #     self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_tag_delete(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}') # noqa
 
         tag = Tag.objects.create(**self.tag_data)
         url = reverse('tag-delete', kwargs={'pk': tag.id})

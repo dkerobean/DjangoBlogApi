@@ -32,7 +32,7 @@ class TestUserProfile(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_view_user_profile(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}') # noqa
 
         pk = self.user.id
         self.url = reverse('profile-view', args=(pk,))
@@ -41,8 +41,8 @@ class TestUserProfile(TestCase):
         self.assertEqual(response.data['user'], self.user.id)
 
     def test_delete_profile(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
-        
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}') # noqa
+
         pk = self.user.id
         self.url = reverse('profile-delete', args=(pk,))
 
