@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'contact',
 
     'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,24 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.CustomUser'
+
+REST_FRAMEWORK = {
+'DEFAULT_AUTHENTICATION_CLASSES': [
+'rest_framework_simplejwt.authentication.JWTAuthentication',
+]
+}
+
+
+# Configure JWT settings
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Set the token lifetime as desired
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME_REFRESH_ON_LOGIN': True,
+    'SLIDING_TOKEN_REFRESH_ON_ROTATION': False,
+    'SLIDING_TOKEN_LIFETIME_REFRESH_ON_ACTIVITY': False,
+    'SLIDING_TOKEN_REFRESH_LIFETIME_SLIDING_LOGIN': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME_SLIDING_LOGIN': timedelta(days=1),
+    'SLIDING_TOKEN_REFRESH_LIFETIME_SLIDING_ACTIVITY': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME_SLIDING_ACTIVITY': timedelta(days=1),
+}
