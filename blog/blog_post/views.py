@@ -114,6 +114,8 @@ class UserProfileDetailView(APIView):
 
 class BlogListView(APIView):
 
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         blogs = BlogPost.objects.all()
         serializer = BlogPostSerializer(blogs, many=True)

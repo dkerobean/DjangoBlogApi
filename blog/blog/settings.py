@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -146,7 +147,7 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Set the token lifetime as desired
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-    'SLIDING_TOKEN_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=120),
     'SLIDING_TOKEN_LIFETIME_REFRESH_ON_LOGIN': True,
     'SLIDING_TOKEN_REFRESH_ON_ROTATION': False,
     'SLIDING_TOKEN_LIFETIME_REFRESH_ON_ACTIVITY': False,
