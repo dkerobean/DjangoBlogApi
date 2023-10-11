@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from datetime import timedelta 
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -156,3 +156,6 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME_SLIDING_ACTIVITY': timedelta(days=1),
     'SLIDING_TOKEN_LIFETIME_SLIDING_ACTIVITY': timedelta(days=1),
 }
+
+
+TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"

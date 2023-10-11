@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 from user.models import CustomUser
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class TestUserProfile(TestCase):
@@ -21,13 +22,18 @@ class TestUserProfile(TestCase):
             'linkedin': 'www.linkedin.com',
             }
 
+        # Generate a JWT token for the user
+        refresh = RefreshToken.for_user(self.user)
+        self.access_token = str(refresh.access_token)
+
     def test_view_users_profiles(self):
         self.url = reverse('profiles')
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_view_user_profile(self):
-        self.client.force_login(self.user)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+
         pk = self.user.id
         self.url = reverse('profile-view', args=(pk,))
         response = self.client.get(self.url)
@@ -35,7 +41,8 @@ class TestUserProfile(TestCase):
         self.assertEqual(response.data['user'], self.user.id)
 
     def test_delete_profile(self):
-        self.client.force_login(self.user)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+        
         pk = self.user.id
         self.url = reverse('profile-delete', args=(pk,))
 

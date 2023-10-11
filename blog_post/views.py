@@ -6,12 +6,11 @@ from .serializers import (TagSerializer,
                           CategorySerializer,
                           UserProfileSerializer,
                           BlogPostSerializer)
-from rest_framework.permissions import IsAdminUser, IsAuthenticated # noqa
+from rest_framework.permissions import IsAuthenticated # noqa
 
 
 class TagCreateView(APIView):
 
-    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         tags = Tag.objects.all()
@@ -31,9 +30,6 @@ class TagDetailView(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        self.permission_classes = [IsAdminUser]
-        self.check_permission(request)
-
         try:
             tag = Tag.objects.get(id=pk)
             tag.delete()
@@ -55,7 +51,7 @@ class CategoryListView(APIView):
 
 class CategoryDetailView(APIView):
 
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         serializer = CategorySerializer(data=request.data)
