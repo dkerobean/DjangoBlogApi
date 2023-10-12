@@ -15,7 +15,7 @@ class UserRegistrationView(APIView):
             user = serializer.save()
             refresh = RefreshToken.for_user(user)
             access_token = str(refresh.access_token)
-            return Response({'access_token': access_token}, status=status.HTTP_201_CREATED)
+            return Response({'access_token': access_token}, status=status.HTTP_201_CREATED) # noqa
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -28,7 +28,7 @@ class UserLoginView(APIView):
             user = serializer.validated_data['user']
             refresh = RefreshToken.for_user(user)
             access_token = str(refresh.access_token)
-            return Response({'access_token': access_token}, status=status.HTTP_201_CREATED)
+            return Response({'access_token': access_token}, status=status.HTTP_201_CREATED) # noqa
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -39,4 +39,4 @@ class UserLogoutView(APIView):
         refresh_token = RefreshToken(request.auth)
         refresh_token.blacklist()
 
-        return Response({'message': 'User logged out'}, status=status.HTTP_200_OK)
+        return Response({'message': 'User logged out'}, status=status.HTTP_200_OK) # noqa

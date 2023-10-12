@@ -30,9 +30,9 @@ class UserLoginSerializer(serializers.Serializer):
             user = authenticate(username=email, password=password)
 
             if not user:
-                raise serializers.ValidationError("Unable to log in with provided credentials.")
+                raise serializers.ValidationError("Unable to log in with provided credentials.") # noqa
         else:
-            raise serializers.ValidationError("Must include 'email' and 'password'.")
+            raise serializers.ValidationError("Must include 'email' and 'password'.") # noqa
 
         data['user'] = user
         return data
