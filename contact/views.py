@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from .serializers import ContactSerializer
 from .models import Contact
 from rest_framework.permissions import IsAdminUser
+from rest_framework.throttling import AnonRateThrottle
 
 
 class ContactListView(APIView):
+
+    throttle_classes = [AnonRateThrottle]
 
     def get(self, request):
         contacts = Contact.objects.all()

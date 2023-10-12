@@ -7,6 +7,7 @@ from .serializers import (TagSerializer,
                           UserProfileSerializer,
                           BlogPostSerializer)
 from rest_framework.permissions import IsAuthenticated # noqa
+from rest_framework.throttling import AnonRateThrottle
 
 
 class TagCreateView(APIView):
@@ -127,6 +128,7 @@ class BlogListView(APIView):
 class BlogDetailView(APIView):
 
     permission_classes = [IsAuthenticated]
+    throttle_classes = [AnonRateThrottle]
 
     def get(self, request, pk):
         try:
