@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -136,11 +137,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.CustomUser'
 
+
 REST_FRAMEWORK = {
-'DEFAULT_AUTHENTICATION_CLASSES': [
-'rest_framework_simplejwt.authentication.JWTAuthentication',
-]
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+
+
 
 
 # Configure JWT settings
@@ -155,6 +161,15 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME_SLIDING_LOGIN': timedelta(days=1),
     'SLIDING_TOKEN_REFRESH_LIFETIME_SLIDING_ACTIVITY': timedelta(days=1),
     'SLIDING_TOKEN_LIFETIME_SLIDING_ACTIVITY': timedelta(days=1),
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'TechBlog',
+    'DESCRIPTION': 'TechBlog" is a straightforward blog platform designed \
+    for tech enthusiasts and writers to share their thoughts, experiences, and expertise in the tech industry.',
+    'VERSION': '1.0.0',
+    "DEFAULT_API_URL": "schema",
+    "DEFAULT_API_VERSION": "1.0",  # Specify your API version here
 }
 
 
