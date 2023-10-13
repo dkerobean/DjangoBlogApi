@@ -148,7 +148,6 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle',
-        'path.to.CustomUserRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '100/day',
@@ -157,9 +156,6 @@ REST_FRAMEWORK = {
 
 
 }
-
-
-
 
 
 # Configure JWT settings
